@@ -69,8 +69,8 @@ def plots(df_sent, df):
     ax2.plot(df.index, df.Close, color='tab:green')
     ax2.set_ylabel('sin', color='tab:green')
     ax2.tick_params('y', colors='tab:green')
-    ax2.set_ylabel('Ripple Price [$]', fontsize=12)
-    plt.title('Ripple Coin Price and Reddit Sentiment', fontsize=16)
+    ax2.set_ylabel('Ripple Percent Change [%]', fontsize=12)
+    plt.title('Ripple Percent Change and Reddit Sentiment', fontsize=16)
     fig.savefig('Price_and_Sentiment.svg')
 
 

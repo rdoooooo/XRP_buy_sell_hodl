@@ -38,5 +38,5 @@ for i, date, in enumerate(date_generated):
 
 
 # Saves the dictionary as a pickle
-with open('ripple_reddit_posts2.pk', 'wb') as handle:
+with open('ripple_reddit_posts.pk', 'wb') as handle:
     pickle.dump(post_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)

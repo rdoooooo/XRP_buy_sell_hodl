@@ -103,11 +103,17 @@ def build_df(table_rows):
 
 # Builds a driver at the web link
 driver = build_driver(url=url)
+# Wait for things to load
 wait()
+# Click on historical tab
 click_historical_tab(driver)
+# Select the full history of data
 click_date_range(driver)
+# Pull the table
 table_rows = get_table_data(driver)
+# Put table information in a dataframe
 df = build_df(table_rows)
-df.head()
-#save_path = '/Users/richarddo/Documents/github/Metis/Projects/Project_2_Luther/xrp_data2.csv'
+
+# Save the dataframe
+#save_path = '..../xrp_data2.csv'
 df.to_csv(save_path)
