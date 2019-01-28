@@ -1,4 +1,4 @@
-# XRP-Buy.Sell.Hodl?
+# XRP-Buy.Sell.Hodl.
 Project on forecasting ripple cryptocurrency prices using various autoregressive models.
 
 ## Why did you do this?

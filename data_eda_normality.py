@@ -11,30 +11,46 @@ from collections import defaultdict
 from statsmodels.graphics.gofplots import qqplot
 import scipy.stats as stats
 # Load data
-data_path = 'xrp_data_clean.csv'
-df = pd.read_csv(data_path)
-df.sort_values('Date', inplace=True)
-df.set_index('Date', inplace=True)
-
-df.head()
 
 
-df = df.Close.pct_change()
-df.dropna(inplace=True)
-df.head()
+def load_data(data_path='xrp_data_clean.csv'):
+    '''
+    Loads dataframe and outputs a single series of percent change of there
+    close daily value
+    '''
+    df = pd.read_csv(data_path)
+    df.reset_index(inplace=True)
+    df.Date = pd.to_datetime(df.Date)
+    df.sort_values('Date', inplace=True)
+    df.set_index('Date', inplace=True)
+    df = df.Close
+    df.dropna(inplace=True)
+    return df
 
-'''
-To apply AR models, need to check how stationary the signal is
-'''
+
+df = load_data()
 
 
 def plot_dt(df):
-    (df * 100).plot()
-    plt.ylabel('Daily % Change')
-    plt.ylabel('Date')
+    (df * 100).plot(figsize=(12, 8), logy=True)
+
+    plt.ylabel('Price [$]', fontsize=16)
+    plt.xlabel('Date', fontsize=16)
+    plt.title('Ripple Price', fontsize=20)
+    plt.grid(which='both')
+    plt.savefig('ripple_price.png')
+
+    plt.figure()
+    (df * 100).plot(figsize=(12, 8))
+    plt.ylabel('Percent Change [%]', fontsize=16)
+    plt.xlabel('Date', fontsize=16)
+    plt.title('Ripple Daily Percent Change', fontsize=18)
+    plt.grid(which='both')
+    plt.savefig('ripple_percent_change.png')
 
 
 plot_dt(df)
+df.head()
 '''
 Plotting Rolling Statistics: We can plot the moving average or moving
 variance and see if it varies with time. By moving average/variance I
@@ -103,4 +119,7 @@ qqplot(df, fit=True, line='45', dist=stats.t)
 
 
 # histogram
-distplot(df, bins=100)
+distplot(np.log10(df), bins=10)
+
+
+df
